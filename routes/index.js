@@ -21,7 +21,6 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
 const homeRoute = (req, res, next) => {
-  console.log(req, res, next);
   res.send("Hi");
 };
 

@@ -1,4 +1,5 @@
-const getAllArticles = (req, res, next) => {};
+const requestHandler = require("./request_handlers/article");
+const { getAllArticles, createNewArticle, deleteArticleById } = requestHandler;
 
 module.exports = (app) => {
   /**
@@ -17,7 +18,21 @@ module.exports = (app) => {
 
   /**
    * @swagger
-   * /article :
+   * /article/{id}:
+   *  get:
+   *    tags:
+   *      - Article
+   *    description: Get Article By id
+   *    summary: Get Article By id
+   *    responses:
+   *      '200':
+   *        description: Article
+   */
+  app.get("/article/:id", getAllArticles);
+
+  /**
+   * @swagger
+   * /article:
    *  post:
    *    tags:
    *      - Article
@@ -27,11 +42,11 @@ module.exports = (app) => {
    *      '200':
    *        description: Created Article
    */
-  app.post("/article", getAllArticles);
+  app.post("/article", createNewArticle);
 
   /**
    * @swagger
-   * /article/:id :
+   * /article/{id}:
    *  put:
    *    tags:
    *      - Article
@@ -45,15 +60,22 @@ module.exports = (app) => {
 
   /**
    * @swagger
-   * /article/:id :
+   * /article/{id}:
    *  delete:
    *    tags:
    *      - Article
    *    description: Delete Article by id
    *    summary: Delete Article by id
+   *    parameters:
+   *      - in: path
+   *        name: id
+   *        type: string
+   *        required: true
    *    responses:
    *      '200':
-   *        description: List of all articles
+   *        description: The article deleted succesfully!
+   *      '409':
+   *        description: There's no article with this id!
    */
-  app.delete("/article/:id", getAllArticles);
+  app.delete("/article/:id", deleteArticleById);
 };
