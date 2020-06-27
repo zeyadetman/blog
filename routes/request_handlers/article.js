@@ -38,9 +38,7 @@ const createNewArticle = async (req, res, next) => {
 
 const deleteArticleById = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
   const { deletedCount, ok } = await Article.deleteOne({ _id: id });
-  console.log(ok, deletedCount);
 
   if (deletedCount === 0 && ok)
     return res.status(409).send({ error: "There's no article with this id!" });
