@@ -1,5 +1,11 @@
-const requestHandler = require("./request_handlers/article");
-const { getAllArticles, createNewArticle, deleteArticleById } = requestHandler;
+const requestHandler = require("../request_handlers/article");
+const {
+  getAllArticles,
+  createNewArticle,
+  deleteArticleById,
+  getArticle,
+  updateArticle,
+} = requestHandler;
 
 module.exports = (app) => {
   /**
@@ -28,7 +34,7 @@ module.exports = (app) => {
    *      '200':
    *        description: Article
    */
-  app.get("/article/:id", getAllArticles);
+  app.get("/article/:id", getArticle);
 
   /**
    * @swagger
@@ -56,7 +62,7 @@ module.exports = (app) => {
    *      '200':
    *        description: Updated Article
    */
-  app.put("/article/:id", getAllArticles);
+  app.put("/article/:id", updateArticle);
 
   /**
    * @swagger

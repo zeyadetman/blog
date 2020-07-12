@@ -20,16 +20,7 @@ const swaggerOptions = {
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
-const homeRoute = (req, res, next) => {
-  res.send("Hi");
-};
-
-module.exports = (app) => {
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-  app.get("/", homeRoute);
-  require("./auth")(app);
-  require("./work")(app);
-  require("./article")(app);
-  require("./newsletter")(app);
-  require("./me")(app);
+module.exports = {
+  swaggerOptions: swaggerUi.serve,
+  swaggerSpec: swaggerUi.setup(swaggerSpec),
 };
