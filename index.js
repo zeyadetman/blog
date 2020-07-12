@@ -2,9 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const morgan = require("morgan");
 
+app.use(morgan("dev"));
 app.use(express.json());
-require("./routes")(app);
+require("./routes/v0")(app);
 
 const uri = process.env.DB_URI;
 const dbName = process.env.DB_NAME;
