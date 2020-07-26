@@ -1,4 +1,5 @@
-const getAllNewsletterEmails = (req, res, next) => {};
+const requestHandler = require("../request_handlers/newsletter");
+const { getAllEmails, addNewEmail, removeEmail, sendToAll } = requestHandler;
 
 module.exports = (app) => {
   /**
@@ -13,7 +14,7 @@ module.exports = (app) => {
    *      '200':
    *        description: List of all emails
    */
-  app.get("/newsletter", getAllNewsletterEmails);
+  app.get("/newsletter", getAllEmails);
 
   /**
    * @swagger
@@ -27,7 +28,7 @@ module.exports = (app) => {
    *      '200':
    *        description: Return the created email
    */
-  app.post("/newsletter", getAllNewsletterEmails);
+  app.post("/newsletter", addNewEmail);
 
   /**
    * @swagger
@@ -41,5 +42,19 @@ module.exports = (app) => {
    *      '200':
    *        description: List of all emails
    */
-  app.delete("/newsletter/:email", getAllNewsletterEmails);
+  app.delete("/newsletter/:email", removeEmail);
+
+  /**
+   * @swagger
+   * /newsletter :
+   *  post:
+   *    tags:
+   *      - NewsLetter
+   *    description: Send Email to Newsletter list
+   *    summary: Send Email to Newsletter list
+   *    responses:
+   *      '200':
+   *        description: success
+   */
+  app.post("/newsletter/send", sendToAll);
 };
