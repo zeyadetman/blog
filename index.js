@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 
@@ -8,8 +7,11 @@ mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 
+require("./auth/auth");
+const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
+
 require("./routes/v0")(app);
 
 const uri = process.env.DB_URI;
