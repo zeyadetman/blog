@@ -2,13 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const cors = require('cors')
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 
-require("./auth/auth");
 const app = express();
+app.use(cors())
+
+require("./auth/auth");
 app.use(morgan("dev"));
 app.use(express.json());
 

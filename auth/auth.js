@@ -14,7 +14,15 @@ passport.use(
     },
     async ({ body }, username, password, done) => {
       try {
-        const user = await UserModel.create({ ...body });
+        const userBody = {
+          firstName: body.firstName,
+          lastName: body.lastName,
+          email: body.email,
+          username,
+          password
+        };
+
+        const user = await UserModel.create(userBody);
 
         return done(null, user);
       } catch (error) {
