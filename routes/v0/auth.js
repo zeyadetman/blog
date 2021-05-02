@@ -55,8 +55,9 @@ module.exports = (app) => {
           };
 
           const token = jwt.sign({ user: body }, process.env.API_SECRET_KEY);
+          const { password, createdAt, updatedAt, __v, ...userValues } = user.toJSON();
 
-          return res.json({ token });
+          return res.json({ token, user: userValues });
         });
       } catch (error) {
         return res.status(500).send({ message: error.message });

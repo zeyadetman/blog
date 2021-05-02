@@ -10,10 +10,10 @@ mongoose.set("useCreateIndex", true);
 
 const app = express();
 app.use(cors())
+app.use(express.json());
 
 require("./auth/auth");
 app.use(morgan("dev"));
-app.use(express.json());
 
 require("./routes/v0")(app);
 
